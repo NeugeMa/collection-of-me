@@ -1,0 +1,29 @@
+@theme {
+  /* Color palette — design-system-portifolio.pdf */
+  --color-background: #161616;
+  --color-foreground: #f1eded;
+  --color-rose: #d8b5bf;
+  --color-rose-2: #998182;
+  --color-muted: #8e8788;
+  --color-line: #2c2a2a;
+  --color-line-2: #242222;
+  --color-placeholder: #252222;
+  --color-soft: #2c2828;
+  --color-panel: #0e0d0d;
+
+  /* Typography */
+  --font-display: 'Instrument Serif', serif;
+  --font-sans: 'Manrope', sans-serif;
+
+  /* Layout — 1440px canvas, 96px section padding, 72px column gap */
+  --spacing-section-x: 96px;
+  --spacing-section-y: 80px;
+  --spacing-column-gap: 72px;
+  --width-canvas: 1440px;
+  --width-number-col: 96px;
+  --width-label-col: 240px;
+  --width-content-col: 720px;
+
+  /* Square corners, no rounded cards */
+  --radius-none: 0px;
+}
