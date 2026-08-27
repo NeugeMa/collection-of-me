@@ -1,16 +1,55 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import Dots from '../components/Dots'
 import ImageCarousel from '../components/ImageCarousel'
 
 const SIDES = ['a', 'b']
 
+const HIGHLIGHT_LINKS = {
+  '@Integration Consulting': 'https://integrationconsulting.com/en/',
+  '@FIAP':
+    'https://www.fiap.com.br/?utm_term=fiap&utm_campaign=PSQ+-+Institucional+-+FIAP+Institucional&utm_source=adwords&utm_medium=ppc&hsa_acc=5249877522&hsa_cam=283477471&hsa_grp=19962859231&hsa_ad=611807872041&hsa_src=g&hsa_tgt=kwd-452097382&hsa_kw=fiap&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=283477471&gclid=CjwKCAjwwL_UBhAjEiwAEhuT5FBjYLD2GlcqzIdmGhmYqXNH2pZ6AomZEb-yIl_78CsqLtBoIbgwSxoCIBcQAvD_BwE',
+}
+
+function renderHighlighted(text) {
+  const pattern = /(@Integration Consulting|@FIAP)/
+  return text.split(pattern).map((part, index) => {
+    if (!(part in HIGHLIGHT_LINKS)) return part
+
+    const href = HIGHLIGHT_LINKS[part]
+    if (!href) {
+      return (
+        <span key={index} className="text-rose">
+          {part}
+        </span>
+      )
+    }
+
+    return (
+      <a
+        key={index}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-rose underline-offset-4 hover:underline"
+      >
+        {part}
+      </a>
+    )
+  })
+}
+
 const aboutSideA = {
   heading: 'Professional Side',
+  images: [
+    '/image/professional-side/Image.jpg',
+    '/image/professional-side/Image (1).jpg',
+    '/image/professional-side/Image (2).jpg',
+  ],
   paragraphs: [
     "Hi, I'm Mariana. Nice to meet you :)",
-    "I'm pursuing a degree in Software Engineering at FIAP, and previously, I studied Data Analysis and Development. Along the way, I've gained experience with several programming languages and technologies, such as SQL, JavaScript, C# and Golang, as well as a solid understanding of hardware.",
+    "I'm pursuing a degree in Software Engineering at @FIAP, and previously, I studied Data Analysis and Development. Along the way, I've gained experience with several programming languages and technologies, such as SQL, JavaScript, C# and Golang, as well as a solid understanding of hardware.",
     'In addition to my technical background, I have familiarity with DevOps practices, UX/UI Design principles, and Agile Methodology, which help me contribute to modern, collaborative, and user-centered development environments.',
     'I also have an advanced level of English and basic knowledge of Spanish, continuously seeking to broaden my cultural and professional horizons.',
     "At the moment I'm working at @Integration Consulting with development.",
@@ -70,11 +109,7 @@ function About() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="grid grid-cols-[280px_1fr] gap-[72px]"
               >
-                <div className="flex h-[420px] items-end bg-placeholder p-4">
-                  <span className="text-xs tracking-widest text-muted uppercase">
-                    Image A
-                  </span>
-                </div>
+                <ImageCarousel images={aboutSideA.images} />
 
                 <div>
                   <span className="text-xs tracking-widest text-rose uppercase">
@@ -85,7 +120,7 @@ function About() {
                   </h3>
                   <div className="flex flex-col gap-4 text-muted">
                     {aboutSideA.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
+                      <p key={paragraph}>{renderHighlighted(paragraph)}</p>
                     ))}
                   </div>
                   <div className="mt-8 flex gap-3">
@@ -125,6 +160,23 @@ function About() {
                     {aboutSideB.heading}
                   </h3>
                   <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem repudiandae laboriosam perferendis nulla earum. Sequi cumque odio quaerat incidunt cupiditate? Vero facilis sint sed obcaecati recusandae minima ad voluptates nihil!</p>
+
+                  <div className="mt-8 flex gap-3">
+                    <a
+                      href="#"
+                      aria-label="Instagram"
+                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+                    >
+                      <FaInstagram size={18} />
+                    </a>
+                    <a
+                      href="#"
+                      aria-label="YouTube"
+                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+                    >
+                      <FaYoutube size={18} />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             )}

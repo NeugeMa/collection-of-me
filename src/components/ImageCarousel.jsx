@@ -15,22 +15,38 @@ function ImageCarousel({ images }) {
     return () => clearInterval(timer)
   }, [images.length])
 
+  const current = images[index]
+  const isImage = current.startsWith('/')
+
   return (
     <div>
       <div className="relative h-[420px] overflow-hidden bg-placeholder">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="absolute inset-0 flex items-end p-4"
-          >
-            <span className="text-xs tracking-widest text-muted uppercase">
-              {images[index]}
-            </span>
-          </motion.div>
+          {isImage ? (
+            <motion.img
+              key={current}
+              src={current}
+              alt=""
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <motion.div
+              key={current}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="absolute inset-0 flex items-end p-4"
+            >
+              <span className="text-xs tracking-widest text-muted uppercase">
+                {current}
+              </span>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
