@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FaGithub, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
-import Dots from '../components/Dots'
+import GitHubRepos from '../components/GitHubRepos'
 import ImageCarousel from '../components/ImageCarousel'
-
-const SIDES = ['a', 'b']
 
 const HIGHLIGHT_LINKS = {
   '@Integration Consulting': 'https://integrationconsulting.com/en/',
@@ -52,7 +50,7 @@ const aboutSideA = {
     "I'm pursuing a degree in Software Engineering at @FIAP, and previously, I studied Data Analysis and Development. Along the way, I've gained experience with several programming languages and technologies, such as SQL, JavaScript, C# and Golang, as well as a solid understanding of hardware.",
     'In addition to my technical background, I have familiarity with DevOps practices, UX/UI Design principles, and Agile Methodology, which help me contribute to modern, collaborative, and user-centered development environments.',
     'I also have an advanced level of English and basic knowledge of Spanish, continuously seeking to broaden my cultural and professional horizons.',
-    "At the moment I'm working at @Integration Consulting with development.",
+    "At the moment I'm working at @Integration Consulting with development full-stack.",
   ],
 }
 
@@ -73,27 +71,6 @@ function About() {
         <div className="mb-10 flex items-center gap-10">
           <span className="w-24 text-sm text-muted">01</span>
           <h2 className="flex-1 font-display text-4xl">About me</h2>
-
-          <div className="flex border border-line">
-            <button
-              type="button"
-              onClick={() => setSide('a')}
-              className={`px-6 py-3 text-sm transition-colors ${
-                side === 'a' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
-              }`}
-            >
-              Side A · Professional
-            </button>
-            <button
-              type="button"
-              onClick={() => setSide('b')}
-              className={`border-l border-line px-6 py-3 text-sm transition-colors ${
-                side === 'b' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
-              }`}
-            >
-              Side B · Personal
-            </button>
-          </div>
         </div>
 
         <hr className="border-line" />
@@ -139,6 +116,8 @@ function About() {
                       <FaLinkedin size={18} />
                     </a>
                   </div>
+
+                  <GitHubRepos />
                 </div>
               </motion.div>
             ) : (
@@ -181,10 +160,6 @@ function About() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-        <div className="mt-10">
-          <Dots count={2} active={SIDES.indexOf(side)} />
         </div>
       </div>
     </section>

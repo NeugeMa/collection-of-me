@@ -1,15 +1,16 @@
 import { Download } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
     <header className="flex h-24 items-center justify-end border-b border-line px-24">
       <nav className="flex items-center gap-10">
-        <a href="#projects" className="text-muted transition-colors hover:text-foreground">
-          Projects
-        </a>
-        <a href="#experiences" className="text-muted transition-colors hover:text-foreground">
-          Experiences
-        </a>
+        <Link
+          to="/side-b"
+          className="text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
+        >
+          Side B · Personal
+        </Link>
         <a
           href="/CV - Mariana.pdf"
           download

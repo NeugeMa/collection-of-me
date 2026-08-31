@@ -1,17 +1,82 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
+import { ChevronDown, FileText, Globe, X } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import LivePreview from './LivePreview'
+import ProjectRepos from './ProjectRepos'
 
-function getSubtitle(project) {
-  return project.subtitle ?? [project.role, project.timeframe].filter(Boolean).join(' · ')
+function localize(value, lang) {
+  if (value == null) return value
+  const isLocalizedWrapper =
+    typeof value === 'object' && !Array.isArray(value) && ('pt' in value || 'en' in value)
+  return isLocalizedWrapper ? (value[lang] ?? value.en ?? value.pt) : value
 }
 
-function getGallery(project) {
-  return project.gallery ?? [{ label: 'Gallery 1' }, { label: 'Gallery 2' }]
+function TopicAccordion({ topic }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="mt-4 border-t border-line pt-4 first:mt-6 first:border-t-0 first:pt-0">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+      >
+        <span className="text-xs tracking-widest text-rose uppercase">{topic.label}</span>
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="shrink-0 text-muted"
+        >
+          <ChevronDown size={14} strokeWidth={1.5} />
+        </motion.span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 flex max-w-xl flex-col gap-4 text-muted">
+              {topic.paragraphs?.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
+            {topic.cycle && (
+              <p className="mt-4 flex flex-wrap items-center gap-2 text-foreground">
+                {topic.cycle.map((step, index) => (
+                  <span key={step} className="flex items-center gap-2">
+                    {index > 0 && <span className="text-rose">→</span>}
+                    {step}
+                  </span>
+                ))}
+              </p>
+            )}
+
+            {topic.details && (
+              <div className="mt-4 flex max-w-xl flex-col gap-3 text-sm text-muted">
+                {topic.details.map((detail) => (
+                  <p key={detail}>{detail}</p>
+                ))}
+              </div>
+            )}
+
+            {topic.closing && <p className="mt-4 max-w-xl text-muted">{topic.closing}</p>}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
 }
 
 function ProjectModal({ project, onClose }) {
+  const [lang, setLang] = useState('pt')
+
   useEffect(() => {
     if (!project) return
 
@@ -26,6 +91,12 @@ function ProjectModal({ project, onClose }) {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [project, onClose])
+
+  if (!project) return <AnimatePresence />
+
+  const summary = localize(project.summary, lang)
+  const about = localize(project.about, lang)
+  const gallery = project.gallery
 
   return (
     <AnimatePresence>
@@ -44,9 +115,9 @@ function ProjectModal({ project, onClose }) {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             onClick={(event) => event.stopPropagation()}
-            className="w-full max-w-3xl border border-line bg-background"
+            className="w-full max-w-4xl border border-line bg-background"
           >
-            <div className="h-64 overflow-hidden bg-placeholder">
+            <div className="h-48 overflow-hidden bg-placeholder">
               {project.cover ? (
                 <img
                   src={project.cover}
@@ -63,64 +134,79 @@ function ProjectModal({ project, onClose }) {
             </div>
 
             <div className="relative p-10">
-              <motion.button
-                type="button"
-                onClick={onClose}
-                aria-label="Close"
-                whileTap={{ scale: 0.8 }}
-                className="absolute top-8 right-8 cursor-pointer text-muted transition-colors hover:text-foreground"
-              >
-                <X size={20} strokeWidth={1.5} />
-              </motion.button>
+              <div className="absolute top-8 right-8 flex items-center gap-4">
+                <div className="flex border border-line text-xs tracking-widest uppercase">
+                  <button
+                    type="button"
+                    onClick={() => setLang('pt')}
+                    className={`cursor-pointer px-3 py-1.5 transition-colors ${
+                      lang === 'pt' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+                    }`}
+                  >
+                    PT
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLang('en')}
+                    className={`cursor-pointer border-l border-line px-3 py-1.5 transition-colors ${
+                      lang === 'en' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+                    }`}
+                  >
+                    EN
+                  </button>
+                </div>
 
-              <h3 className="font-display text-4xl">{project.title}</h3>
-              {getSubtitle(project) && (
-                <p className="mt-2 text-muted">{getSubtitle(project)}</p>
+                <motion.button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Close"
+                  whileTap={{ scale: 0.8 }}
+                  className="cursor-pointer text-muted transition-colors hover:text-foreground"
+                >
+                  <X size={20} strokeWidth={1.5} />
+                </motion.button>
+              </div>
+
+              <h3 className="max-w-xl font-display text-4xl">{project.title}</h3>
+
+              {summary && <p className="mt-6 max-w-xl text-muted">{summary}</p>}
+              {!summary && project.description && (
+                <p className="mt-6 max-w-xl text-muted">{project.description}</p>
               )}
 
-              {project.summary && <p className="mt-6 text-muted">{project.summary}</p>}
-              {!project.summary && project.description && (
-                <p className="mt-6 text-muted">{project.description}</p>
-              )}
-
-              {project.about && (
+              {about?.topics?.[0] && (
                 <div className="mt-6">
                   <h4 className="text-xs tracking-widest text-rose uppercase">
-                    {project.about.heading}
+                    {about.topics[0].label}
                   </h4>
-                  <div className="mt-3 flex flex-col gap-4 text-muted">
-                    {project.about.paragraphs.map((paragraph) => (
+                  <div className="mt-3 flex max-w-xl flex-col gap-4 text-muted">
+                    {about.topics[0].paragraphs?.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
                   </div>
-
-                  {project.about.cycle && (
-                    <p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center text-foreground">
-                      {project.about.cycle.map((step, index) => (
-                        <span key={step} className="flex items-center gap-2">
-                          {index > 0 && <span className="text-rose">→</span>}
-                          {step}
-                        </span>
-                      ))}
-                    </p>
-                  )}
-
-                  {project.about.closing && (
-                    <p className="mt-4 text-muted">{project.about.closing}</p>
-                  )}
                 </div>
               )}
 
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                {getGallery(project).map((item) =>
-                  item.type === 'iframe' ? (
-                    <div
-                      key={item.label}
-                      className="col-span-2 border border-line"
-                    >
-                      <LivePreview src={item.src} title={item.label} />
-                    </div>
-                  ) : (
+              {about?.topics?.slice(1).map((topic) => (
+                <TopicAccordion key={topic.label} topic={topic} />
+              ))}
+
+              {project.repos && <ProjectRepos repos={project.repos} />}
+
+              {project.livePreview && (
+                <div className="mt-6 border border-line">
+                  <div className="border-b border-line px-4 py-2">
+                    <span className="text-xs tracking-widest text-muted uppercase">
+                      Live preview
+                    </span>
+                  </div>
+                  <LivePreview src={project.livePreview} title={`${project.title} live preview`} />
+                </div>
+              )}
+
+              {gallery && gallery.length > 0 && (
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  {gallery.map((item) => (
                     <div
                       key={item.label}
                       className="h-40 overflow-hidden border border-line bg-placeholder"
@@ -147,29 +233,20 @@ function ProjectModal({ project, onClose }) {
                         </div>
                       )}
                     </div>
-                  ),
-                )}
-              </div>
+                  ))}
+                </div>
+              )}
 
               <div className="mt-6 flex gap-3">
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-line px-6 py-3 text-sm transition-colors hover:bg-soft"
-                  >
-                    Live link
-                  </a>
-                )}
-                {project.repoUrl && (
+                {!project.repos && project.repoUrl && (
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-line px-6 py-3 text-sm transition-colors hover:bg-soft"
+                    aria-label="Repository"
+                    className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
                   >
-                    Repository
+                    <FaGithub size={18} />
                   </a>
                 )}
                 {project.docsUrl && (
@@ -177,9 +254,21 @@ function ProjectModal({ project, onClose }) {
                     href={project.docsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-line px-6 py-3 text-sm transition-colors hover:bg-soft"
+                    aria-label="Docs"
+                    className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
                   >
-                    Docs
+                    <FileText size={18} strokeWidth={1.5} />
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Live site"
+                    className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+                  >
+                    <Globe size={18} strokeWidth={1.5} />
                   </a>
                 )}
               </div>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Dots from '../components/Dots'
 import ProjectCard from '../components/ProjectCard'
 import ProjectModal from '../components/ProjectModal'
 
@@ -9,41 +11,71 @@ const LOREM =
 const projects = [
   {
     title: 'Orbital Academy - Global Solution',
-    subtitle: 'A project about universe',
-    summary:
-      'Plataforma que pega o que a NASA e o INPE já enxergam lá de cima — risco em lavoura, foco de calor, déficit hídrico — e coloca na mão de quem precisa decidir o que fazer. Um modelo prevê, um otimizador aloca, você opera. O satélite finalmente chega em campo.',
+    subtitle: {
+      pt: 'Um projeto sobre o espaço',
+      en: 'A project about universe',
+    },
     about: {
-      heading: 'Sobre o Projeto',
-      paragraphs: [
-        'O dado espacial é abundante, gratuito e cada vez mais preciso. O que ainda é escasso é a capacidade de transformar esse dado em ação sob recurso limitado, em tempo real, por pessoas que não têm formação em sensoriamento remoto.',
-        'O Orbital Academy não substitui o especialista técnico: ele torna a decisão com dado espacial acessível para qualquer operador, produtor rural ou equipe de campo que antes ficava de fora desse ciclo. A plataforma percorre o ciclo completo:',
-      ],
-      cycle: ['Ver', 'Prever', 'Validar', 'Decidir', 'Otimizar', 'Agir', 'Medir'],
+      pt: {
+        topics: [
+          {
+            label: '1. O que é a Orbital Academy?',
+            paragraphs: [
+              'Sendo uma plataforma que ensina qualquer pessoa a transformar dado espacial em decisão real, operando uma missão de verdade em vez de assistir a uma aula.',
+              'A solução combina dado aberto de satélite (NASA Earthdata, NASA FIRMS, INPE, Copernicus), um modelo de machine learning tradicional que prevê risco e um motor de otimização próprio que decide como alocar recursos limitados.',
+              'O Console de Missão é a interface onde a pessoa vive esse ciclo. A Espaçoteca é a aba complementar de conteúdo e exploração.',
+            ],
+          },
+          {
+            label: '2. Contexto e Problema',
+            paragraphs: [
+              'O tema da Global Solution 2026.1 da FIAP é tecnologia espacial aplicada a desafios reais. A live de abertura, com a Bizu Space, a Safe on Orbit e a Visiona, deixou três pontos consistentes: o mercado real está em downstream (aplicação dos dados), o dado relevante já é aberto (Landsat, Sentinel, INPE, NASA Earthdata), e a entrega que importa é virar dado em decisão. O Guilherme da Safe on Orbit foi específico ao dizer que o que eles fazem internamente não é IA generativa, é otimização clássica sobre cenários com variáveis aleatórias e recursos limitados.',
+              'Dado espacial é abundante, é gratuito e é cada vez mais fácil de consumir. Mas saber o que fazer com ele continua sendo uma capacidade restrita a quem tem formação técnica específica. Para o pequeno produtor rural, para a equipe de Defesa Civil de um município pequeno, para um agente de saúde em campo, o satélite ainda parece distante. A pergunta não é mais "como vemos?". A pergunta é "quem decide?".',
+              'Em paralelo, FIAP e o ecossistema brasileiro de tecnologia carregam a "síndrome do vira-lata" que o Arthur da Visiona citou na live: a ideia de que espaço é coisa de gênio da NASA. Isso afasta jovens da área e perpetua a dependência de capacidades estrangeiras justamente em um momento em que o downstream está crescendo.',
+            ],
+          },
+          {
+            label: '3. Solução',
+            paragraphs: [
+              'Decisão com dado espacial não acontece quando alguém vê um mapa colorido. Acontece quando alguém escolhe, sob recurso limitado, qual ação tomar primeiro, e mede o resultado. O Orbital Academy organiza essa transformação em sete movimentos:',
+            ],
+            cycle: ['Ver', 'Prever', 'Validar', 'Decidir', 'Otimizar', 'Agir', 'Medir'],
+            details: [
+              '1. Ver: o satélite acende uma área de risco no mapa, com dado aberto e real.',
+              '2. Prever: o modelo de ML estima a probabilidade de perda e o motivo principal.',
+              '3. Validar: a câmera na ponta confirma ou corrige a previsão do satélite, em campo.',
+              '4. Decidir: o operador escolhe onde alocar o recurso escasso (água, equipe, tempo).',
+              '5. Otimizar: o motor próprio recalcula a melhor alocação dada as restrições atuais.',
+              '6. Agir: o app guia a execução, inclusive offline.',
+              '7. Medir: o sistema registra impacto e realimenta o modelo e a próxima decisão.',
+            ],
+          },
+        ],
+      },
     },
     cover: '/image/projects-banner/Image.webp',
-    gallery: [
-      {
-        type: 'iframe',
-        src: 'https://orbital-academy-omega.vercel.app/',
-        label: 'Live preview',
-      },
-    ],
-    repoUrl: 'https://github.com/NeugeMa/orbital-academy',
+    repos: ['OrbitalAcademy/orbital-academy-service', 'OrbitalAcademy/orbital-academy-ml'],
+    livePreview: 'https://orbital-academy-omega.vercel.app/',
     docsUrl: '/projects/orbital-academy-documentacao.pdf',
+    liveUrl: 'https://orbital-academy-omega.vercel.app/',
   },
   { title: 'Project 2', role: 'Role', timeframe: 'Timeframe', description: LOREM },
   { title: 'Project 3', role: 'Role', timeframe: 'Timeframe', description: LOREM },
   { title: 'Project 4', role: 'Role', timeframe: 'Timeframe', description: LOREM },
   { title: 'Project 5', role: 'Role', timeframe: 'Timeframe', description: LOREM },
+  { title: 'Project 6', role: 'Role', timeframe: 'Timeframe', description: LOREM },
 ]
 
-const INITIAL_COUNT = 3
+const CARDS_PER_PAGE = 3
 
 function Projects() {
-  const [expanded, setExpanded] = useState(false)
+  const [page, setPage] = useState(0)
   const [selectedProject, setSelectedProject] = useState(null)
-  const visible = projects.slice(0, INITIAL_COUNT)
-  const extra = projects.slice(INITIAL_COUNT)
+  const pageCount = Math.ceil(projects.length / CARDS_PER_PAGE)
+
+  function goToPage(index) {
+    setPage((index + pageCount) % pageCount)
+  }
 
   return (
     <section
@@ -54,46 +86,57 @@ function Projects() {
         <div className="mb-10 flex items-center gap-10">
           <span className="w-24 text-sm text-muted">03</span>
           <h2 className="flex-1 font-display text-4xl">Projects</h2>
+
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => goToPage(page - 1)}
+              aria-label="Previous projects"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+            >
+              <ChevronLeft size={16} strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => goToPage(page + 1)}
+              aria-label="Next projects"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+            >
+              <ChevronRight size={16} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
 
         <hr className="border-line" />
 
-        <div className="mt-10 grid grid-cols-2 gap-6">
-          {visible.map((project) => (
-            <ProjectCard
-              key={project.title}
-              label={project.title}
-              image={project.cover}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
-
-          <AnimatePresence initial={false} mode="popLayout">
-            {expanded &&
-              extra.map((project) => (
-                <ProjectCard
-                  key={project.title}
-                  label={project.title}
-                  image={project.cover}
-                  onClick={() => setSelectedProject(project)}
-                  layout="position"
-                  initial={{ opacity: 0, y: -24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -24 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                />
-              ))}
-          </AnimatePresence>
-
-          <motion.button
-            layout="position"
-            type="button"
-            onClick={() => setExpanded((value) => !value)}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="flex aspect-[3/2] items-center justify-center border border-line bg-panel text-xs tracking-widest text-rose uppercase transition-colors hover:text-foreground"
+        <div className="mt-10 overflow-hidden">
+          <motion.div
+            className="flex"
+            animate={{ x: `-${page * 100}%` }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
-            {expanded ? 'Show less' : 'View all'}
-          </motion.button>
+            {Array.from({ length: pageCount }).map((_, pageIndex) => (
+              <div
+                key={pageIndex}
+                className="grid w-full shrink-0 grid-cols-3 gap-6"
+              >
+                {projects
+                  .slice(pageIndex * CARDS_PER_PAGE, pageIndex * CARDS_PER_PAGE + CARDS_PER_PAGE)
+                  .map((project) => (
+                    <ProjectCard
+                      key={project.title}
+                      label={project.title}
+                      image={project.cover}
+                      onClick={() => setSelectedProject(project)}
+                    />
+                  ))}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="mt-10">
+          <Dots count={pageCount} active={page} onSelect={goToPage} />
         </div>
       </div>
 
