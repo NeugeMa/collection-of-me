@@ -1,17 +1,17 @@
 import Navbar from './components/Navbar'
-import Contributions from './sections/Contributions'
 import Experiences from './sections/Experiences'
+import Footer from './sections/Footer'
 import Hero from './sections/Hero'
-import Journey from './sections/Journey'
+import Projects from './sections/Projects'
 
 function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <Hero />
-      <Contributions />
       <Experiences />
-      <Journey />
+      <Projects />
+      <Footer />
     </div>
   )
 }

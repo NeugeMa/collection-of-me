@@ -5,9 +5,6 @@ function Navbar() {
   return (
     <header className="flex h-24 items-center justify-end border-b border-line px-24">
       <nav className="flex items-center gap-10">
-        <Link to="/projects" className="text-muted transition-colors hover:text-foreground">
-          Projects
-        </Link>
         <Link to="/about" className="text-muted transition-colors hover:text-foreground">
           About Me
         </Link>

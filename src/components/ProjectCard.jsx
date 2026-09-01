@@ -1,27 +1,30 @@
 import { motion } from 'framer-motion'
 
-function ProjectCard({ label, image, onClick, ...motionProps }) {
+function ProjectCard({ label, description, image, onClick, ...motionProps }) {
   return (
     <motion.button
       type="button"
       onClick={onClick}
-      whileTap={{ scale: 0.96 }}
+      whileTap={{ scale: 0.97 }}
       {...motionProps}
-      className="group relative flex aspect-[3/2] cursor-pointer items-end overflow-hidden bg-placeholder p-4 text-left"
+      className="group flex cursor-pointer flex-col text-left"
     >
-      {image && (
-        <img
-          src={image}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+      <div className="aspect-[4/3] overflow-hidden rounded-3xl bg-placeholder">
+        {image ? (
+          <img
+            src={image}
+            alt=""
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className="h-full w-full transition-colors group-hover:bg-soft" />
+        )}
+      </div>
+
+      <h3 className="mt-4 text-lg font-semibold text-foreground">{label}</h3>
+      {description && (
+        <p className="mt-1 line-clamp-2 text-sm text-muted">{description}</p>
       )}
-      {!image && (
-        <div className="absolute inset-0 transition-colors group-hover:bg-soft" />
-      )}
-      <span className="relative z-10 bg-panel/70 px-2 py-1 text-xs tracking-widest text-muted uppercase">
-        {label}
-      </span>
     </motion.button>
   )
 }

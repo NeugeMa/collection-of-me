@@ -8,6 +8,7 @@ import {
   SiReact,
   SiTypescript,
 } from 'react-icons/si'
+import GitHubContributions from '../components/GitHubContributions'
 import ImageCarousel from '../components/ImageCarousel'
 
 const PHOTOS = ['Photo 1', 'Photo 2', 'Photo 3', 'Photo 4']
@@ -25,7 +26,7 @@ const SKILLS = [
 
 function Hero() {
   return (
-    <section className="relative flex items-center px-24 py-20">
+    <section className="relative flex h-[calc(100vh-96px)] flex-col justify-center gap-10 border-b border-line px-24 py-10">
       <div className="grid w-full grid-cols-2 items-center gap-20">
         <div>
           <span className="text-sm tracking-widest text-rose uppercase">
@@ -90,8 +91,10 @@ function Hero() {
           </div>
         </div>
 
-        <ImageCarousel images={PHOTOS} height={320} />
+        <ImageCarousel images={PHOTOS} height={440} />
       </div>
+
+      <GitHubContributions />
     </section>
   )
 }

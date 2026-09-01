@@ -115,59 +115,45 @@ function ProjectModal({ project, onClose }) {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             onClick={(event) => event.stopPropagation()}
-            className="w-full max-w-4xl border border-line bg-background"
+            className="max-h-[85vh] w-full max-w-4xl overflow-y-auto border border-line bg-background"
           >
-            <div className="h-48 overflow-hidden bg-placeholder">
-              {project.cover ? (
-                <img
-                  src={project.cover}
-                  alt={project.title}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full items-end p-4">
-                  <span className="text-xs tracking-widest text-muted uppercase">
-                    Cover image
-                  </span>
-                </div>
-              )}
-            </div>
+            <div className="p-10">
+              <div className="flex items-start justify-between gap-6">
+                <h3 className="max-w-xl font-display text-4xl">{project.title}</h3>
 
-            <div className="relative p-10">
-              <div className="absolute top-8 right-8 flex items-center gap-4">
-                <div className="flex border border-line text-xs tracking-widest uppercase">
-                  <button
-                    type="button"
-                    onClick={() => setLang('pt')}
-                    className={`cursor-pointer px-3 py-1.5 transition-colors ${
-                      lang === 'pt' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
-                    }`}
-                  >
-                    PT
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLang('en')}
-                    className={`cursor-pointer border-l border-line px-3 py-1.5 transition-colors ${
-                      lang === 'en' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
-                    }`}
-                  >
-                    EN
-                  </button>
-                </div>
+                <div className="flex shrink-0 items-center gap-4">
+                  <div className="flex border border-line text-xs tracking-widest uppercase">
+                    <button
+                      type="button"
+                      onClick={() => setLang('pt')}
+                      className={`cursor-pointer px-3 py-1.5 transition-colors ${
+                        lang === 'pt' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+                      }`}
+                    >
+                      PT
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setLang('en')}
+                      className={`cursor-pointer border-l border-line px-3 py-1.5 transition-colors ${
+                        lang === 'en' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+                      }`}
+                    >
+                      EN
+                    </button>
+                  </div>
 
-                <motion.button
-                  type="button"
-                  onClick={onClose}
-                  aria-label="Close"
-                  whileTap={{ scale: 0.8 }}
-                  className="cursor-pointer text-muted transition-colors hover:text-foreground"
-                >
-                  <X size={20} strokeWidth={1.5} />
-                </motion.button>
+                  <motion.button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Close"
+                    whileTap={{ scale: 0.8 }}
+                    className="cursor-pointer text-muted transition-colors hover:text-foreground"
+                  >
+                    <X size={20} strokeWidth={1.5} />
+                  </motion.button>
+                </div>
               </div>
-
-              <h3 className="max-w-xl font-display text-4xl">{project.title}</h3>
 
               {summary && <p className="mt-6 max-w-xl text-muted">{summary}</p>}
               {!summary && project.description && (

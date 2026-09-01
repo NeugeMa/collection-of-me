@@ -2,27 +2,34 @@ import ExperienceItem from '../components/ExperienceItem'
 
 const experiences = [
   {
-    logoLabel: 'IC',
-    logoColor: '#4F6DF5',
+    logo: '/logos/integration-consulting.png',
     company: 'Integration Consulting',
     role: 'System Developer Intern',
     period: 'Jan 2026 –',
     current: true,
-    description:
-      'At Integration Consulting, I work on data analysis, software architecture, and building features in JavaScript, React.js and SQL as part of the development team.',
+    skills: [
+      'Data Analysis',
+      'Software Architecture',
+      'JavaScript',
+      'React.js',
+      'English',
+      'SQL',
+      'C#',
+    ],
   },
   {
-    logoLabel: 'FI',
-    logoColor: '#E8862E',
+    logo: '/logos/fiap.png',
     company: 'FIAP',
     role: 'Technical Support Intern',
     period: 'Sep 2024 – Jan 2026',
-    description:
-      'Provided technical support with a focus on Microsoft Excel, task automation, computer hardware, and computer networking troubleshooting.',
-    certificate: {
-      label: 'Windows Prompt - utilizando o CMD (Alura)',
-      file: '/certificates/windows-prompt-cmd-alura.pdf',
-    },
+    skills: [
+      'Microsoft Excel',
+      'Task Automation',
+      'English',
+      'Computer Hardware',
+      'Computer Networking',
+      'Problem Solving',
+    ],
   },
 ]
 
@@ -30,7 +37,7 @@ function Experiences() {
   return (
     <section
       id="experiences"
-      className="flex min-h-screen flex-col justify-center border-b border-line px-24 py-20"
+      className="border-b border-line px-24 py-20"
     >
       <div className="mx-auto w-full max-w-5xl">
         <div className="mb-14 flex items-center gap-10">
@@ -38,7 +45,7 @@ function Experiences() {
           <h2 className="font-display text-4xl">Experiences</h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-16 gap-y-14">
+        <div className="border-l border-line pl-10">
           {experiences.map((experience) => (
             <ExperienceItem key={experience.company} {...experience} />
           ))}

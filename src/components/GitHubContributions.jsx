@@ -116,8 +116,8 @@ function GitHubContributions() {
     <div>
       <h4 className="font-display text-2xl">Contribution Graph</h4>
 
-      <div className="mt-6 flex gap-4">
-        <div className="flex-1 overflow-x-auto border border-line p-6">
+      <div className="mt-6 flex items-start gap-4">
+        <div className="w-fit overflow-x-auto border border-line p-6">
           {!yearData ? (
             <p className="text-sm text-muted">Loading contributions…</p>
           ) : (

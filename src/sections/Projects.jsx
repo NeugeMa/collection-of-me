@@ -11,6 +11,7 @@ const LOREM =
 const projects = [
   {
     title: 'Orbital Academy - Global Solution',
+    cardDescription: 'Turning open space data into real, on-the-ground decisions.',
     subtitle: {
       pt: 'Um projeto sobre o espaço',
       en: 'A project about universe',
@@ -66,7 +67,7 @@ const projects = [
   { title: 'Project 6', role: 'Role', timeframe: 'Timeframe', description: LOREM },
 ]
 
-const CARDS_PER_PAGE = 3
+const CARDS_PER_PAGE = 2
 
 function Projects() {
   const [page, setPage] = useState(0)
@@ -80,9 +81,9 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="flex min-h-screen flex-col justify-center border-b border-line px-24 py-20"
+      className="border-b border-line px-24 py-20"
     >
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 flex items-center gap-10">
           <span className="w-24 text-sm text-muted">03</span>
           <h2 className="flex-1 font-display text-4xl">Projects</h2>
@@ -118,7 +119,7 @@ function Projects() {
             {Array.from({ length: pageCount }).map((_, pageIndex) => (
               <div
                 key={pageIndex}
-                className="grid w-full shrink-0 grid-cols-3 gap-6"
+                className="grid w-full shrink-0 grid-cols-2 gap-10"
               >
                 {projects
                   .slice(pageIndex * CARDS_PER_PAGE, pageIndex * CARDS_PER_PAGE + CARDS_PER_PAGE)
@@ -126,6 +127,7 @@ function Projects() {
                     <ProjectCard
                       key={project.title}
                       label={project.title}
+                      description={project.cardDescription ?? project.description}
                       image={project.cover}
                       onClick={() => setSelectedProject(project)}
                     />

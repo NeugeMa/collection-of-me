@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import App from './App.jsx'
 import AboutPage from './pages/AboutPage.jsx'
-import ProjectsPage from './pages/ProjectsPage.jsx'
 import SideB from './pages/SideB.jsx'
 
 const PAGE_TRANSITION = {
@@ -31,14 +30,6 @@ function AppRoutes() {
           element={
             <motion.div {...PAGE_TRANSITION}>
               <AboutPage />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <motion.div {...PAGE_TRANSITION}>
-              <ProjectsPage />
             </motion.div>
           }
         />
