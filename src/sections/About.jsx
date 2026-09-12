@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FaGithub, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
+import { FaInstagram, FaYoutube } from 'react-icons/fa'
 import GitHubRepos from '../components/GitHubRepos'
-import ImageCarousel from '../components/ImageCarousel'
 
 const HIGHLIGHT_LINKS = {
   '@Integration Consulting': 'https://integrationconsulting.com/en/',
@@ -40,11 +39,6 @@ function renderHighlighted(text) {
 
 const aboutSideA = {
   heading: 'Professional Side',
-  images: [
-    '/image/professional-side/Image.jpg',
-    '/image/professional-side/Image (1).jpg',
-    '/image/professional-side/Image (2).jpg',
-  ],
   paragraphs: [
     "Hi, I'm Mariana. Nice to meet you :)",
     "I'm pursuing a degree in Software Engineering at @FIAP, and previously, I studied Data Analysis and Development. Along the way, I've gained experience with several programming languages and technologies, such as SQL, JavaScript, C# and Golang, as well as a solid understanding of hardware.",
@@ -56,7 +50,6 @@ const aboutSideA = {
 
 const aboutSideB = {
   heading: 'Personal Side',
-  images: ['Photo 1', 'Photo 2', 'Photo 3', 'Photo 4'],
 }
 
 function About() {
@@ -65,17 +58,38 @@ function About() {
   return (
     <section
       id="about"
-      className="flex min-h-screen flex-col justify-center border-b border-line px-24 py-20"
+      className="flex min-h-screen flex-col justify-center border-b border-line px-6 py-16 sm:px-12 lg:px-24 lg:py-20"
     >
       <div className="mx-auto w-full max-w-5xl">
-        <div className="mb-10 flex items-center gap-10">
-          <span className="w-24 text-sm text-muted">01</span>
-          <h2 className="flex-1 font-display text-4xl">About me</h2>
+        <div className="mb-10 flex flex-wrap items-center gap-6 sm:gap-10">
+          <span className="w-12 text-sm text-muted sm:w-24">01</span>
+          <h2 className="flex-1 font-display text-3xl sm:text-4xl">About me</h2>
+
+          <div className="flex border border-line">
+            <button
+              type="button"
+              onClick={() => setSide('a')}
+              className={`cursor-pointer px-6 py-3 text-sm transition-colors ${
+                side === 'a' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+              }`}
+            >
+              Side A · Professional
+            </button>
+            <button
+              type="button"
+              onClick={() => setSide('b')}
+              className={`cursor-pointer border-l border-line px-6 py-3 text-sm transition-colors ${
+                side === 'b' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+              }`}
+            >
+              Side B · Personal
+            </button>
+          </div>
         </div>
 
         <hr className="border-line" />
 
-        <div className="relative mt-10 min-h-[520px]">
+        <div className="relative mt-10">
           <AnimatePresence mode="wait">
             {side === 'a' ? (
               <motion.div
@@ -84,41 +98,16 @@ function About() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
-                className="grid grid-cols-[280px_1fr] gap-[72px]"
               >
-                <ImageCarousel images={aboutSideA.images} />
-
-                <div>
-                  <span className="text-xs tracking-widest text-rose uppercase">
-                    Side A
-                  </span>
-                  <h3 className="mt-3 mb-6 font-display text-3xl">
-                    {aboutSideA.heading}
-                  </h3>
-                  <div className="flex flex-col gap-4 text-muted">
-                    {aboutSideA.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{renderHighlighted(paragraph)}</p>
-                    ))}
-                  </div>
-                  <div className="mt-8 flex gap-3">
-                    <a
-                      href="https://github.com/NeugeMa"
-                      aria-label="GitHub"
-                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
-                    >
-                      <FaGithub size={18} />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/neugema/"
-                      aria-label="LinkedIn"
-                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
-                    >
-                      <FaLinkedin size={18} />
-                    </a>
-                  </div>
-
-                  <GitHubRepos />
+                <span className="text-xs tracking-widest text-rose uppercase">Side A</span>
+                <h3 className="mt-4 mb-8 font-display text-4xl">{aboutSideA.heading}</h3>
+                <div className="flex max-w-3xl flex-col gap-6 text-lg text-muted">
+                  {aboutSideA.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{renderHighlighted(paragraph)}</p>
+                  ))}
                 </div>
+
+                <GitHubRepos />
               </motion.div>
             ) : (
               <motion.div
@@ -127,35 +116,26 @@ function About() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
-                className="grid grid-cols-[280px_1fr] gap-[72px]"
               >
-                <ImageCarousel images={aboutSideB.images} />
+                <span className="text-xs tracking-widest text-rose uppercase">Side B</span>
+                <h3 className="mt-4 mb-8 font-display text-4xl">{aboutSideB.heading}</h3>
+                <p className="max-w-3xl text-lg text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem repudiandae laboriosam perferendis nulla earum. Sequi cumque odio quaerat incidunt cupiditate? Vero facilis sint sed obcaecati recusandae minima ad voluptates nihil!</p>
 
-                <div>
-                  <span className="text-xs tracking-widest text-rose uppercase">
-                    Side B
-                  </span>
-                  <h3 className="mt-3 mb-6 font-display text-3xl">
-                    {aboutSideB.heading}
-                  </h3>
-                  <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem repudiandae laboriosam perferendis nulla earum. Sequi cumque odio quaerat incidunt cupiditate? Vero facilis sint sed obcaecati recusandae minima ad voluptates nihil!</p>
-
-                  <div className="mt-8 flex gap-3">
-                    <a
-                      href="#"
-                      aria-label="Instagram"
-                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
-                    >
-                      <FaInstagram size={18} />
-                    </a>
-                    <a
-                      href="#"
-                      aria-label="YouTube"
-                      className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
-                    >
-                      <FaYoutube size={18} />
-                    </a>
-                  </div>
+                <div className="mt-8 flex gap-3">
+                  <a
+                    href="#"
+                    aria-label="Instagram"
+                    className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+                  >
+                    <FaInstagram size={18} />
+                  </a>
+                  <a
+                    href="#"
+                    aria-label="YouTube"
+                    className="flex h-11 w-11 items-center justify-center border border-line text-muted transition-colors hover:text-foreground"
+                  >
+                    <FaYoutube size={18} />
+                  </a>
                 </div>
               </motion.div>
             )}

@@ -116,8 +116,8 @@ function GitHubContributions() {
     <div>
       <h4 className="font-display text-2xl">Contribution Graph</h4>
 
-      <div className="mt-6 flex items-start gap-4">
-        <div className="w-fit overflow-x-auto border border-line p-6">
+      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div className="w-full overflow-x-auto border border-line p-4 sm:w-fit sm:p-6">
           {!yearData ? (
             <p className="text-sm text-muted">Loading contributions…</p>
           ) : (
@@ -137,13 +137,13 @@ function GitHubContributions() {
           )}
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex gap-2 overflow-x-auto sm:flex-col">
           {YEARS.map((y) => (
             <button
               key={y}
               type="button"
               onClick={() => setYear(y)}
-              className={`cursor-pointer border px-4 py-2 text-sm transition-colors ${
+              className={`shrink-0 cursor-pointer border px-4 py-2 text-sm transition-colors ${
                 y === year
                   ? 'border-rose bg-rose text-background'
                   : 'border-line text-muted hover:text-foreground'

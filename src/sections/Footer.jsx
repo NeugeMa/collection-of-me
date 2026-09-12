@@ -16,7 +16,7 @@ function scrollToTop(event) {
 function Footer() {
   return (
     <footer className="border-t border-line bg-panel">
-      <div className="flex flex-col gap-10 px-24 py-20 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-10 px-6 py-14 sm:px-12 lg:px-24 lg:py-20 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-4xl">
             Let's <em className="text-rose">talk</em>
@@ -52,7 +52,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 border-t border-line px-24 py-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-6 border-t border-line px-6 py-6 sm:px-12 lg:px-24 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-6 text-sm text-muted">
           <span>Built with:</span>
           {STACK.map(({ name, Icon }) => (

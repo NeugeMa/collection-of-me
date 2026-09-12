@@ -37,15 +37,15 @@ function Experiences() {
   return (
     <section
       id="experiences"
-      className="border-b border-line px-24 py-20"
+      className="border-b border-line px-6 py-16 sm:px-12 lg:px-24 lg:py-20"
     >
       <div className="mx-auto w-full max-w-5xl">
-        <div className="mb-14 flex items-center gap-10">
-          <span className="w-24 text-sm text-muted">02</span>
-          <h2 className="font-display text-4xl">Experiences</h2>
+        <div className="mb-14 flex items-center gap-6 sm:gap-10">
+          <span className="w-12 text-sm text-muted sm:w-24">02</span>
+          <h2 className="font-display text-3xl sm:text-4xl">Experiences</h2>
         </div>
 
-        <div className="border-l border-line pl-10">
+        <div className="border-l border-line pl-6 sm:pl-10">
           {experiences.map((experience) => (
             <ExperienceItem key={experience.company} {...experience} />
           ))}

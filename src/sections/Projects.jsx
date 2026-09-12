@@ -81,12 +81,12 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="border-b border-line px-24 py-20"
+      className="border-b border-line px-6 py-16 sm:px-12 lg:px-24 lg:py-20"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <div className="mb-10 flex items-center gap-10">
-          <span className="w-24 text-sm text-muted">03</span>
-          <h2 className="flex-1 font-display text-4xl">Projects</h2>
+        <div className="mb-10 flex items-center gap-6 sm:gap-10">
+          <span className="w-12 text-sm text-muted sm:w-24">03</span>
+          <h2 className="flex-1 font-display text-3xl sm:text-4xl">Projects</h2>
 
           <div className="flex gap-3">
             <button
@@ -119,7 +119,7 @@ function Projects() {
             {Array.from({ length: pageCount }).map((_, pageIndex) => (
               <div
                 key={pageIndex}
-                className="grid w-full shrink-0 grid-cols-2 gap-10"
+                className="grid w-full shrink-0 grid-cols-1 gap-10 sm:grid-cols-2"
               >
                 {projects
                   .slice(pageIndex * CARDS_PER_PAGE, pageIndex * CARDS_PER_PAGE + CARDS_PER_PAGE)

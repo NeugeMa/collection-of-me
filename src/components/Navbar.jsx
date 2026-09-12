@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
-    <header className="flex h-24 items-center justify-end border-b border-line px-24">
-      <nav className="flex items-center gap-10">
+    <header className="flex h-24 items-center justify-end border-b border-line px-6 sm:px-12 lg:px-24">
+      <nav className="flex items-center gap-4 sm:gap-10">
         <Link to="/about" className="text-muted transition-colors hover:text-foreground">
           About Me
         </Link>

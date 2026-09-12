@@ -33,7 +33,7 @@ function GitHubRepos() {
   }
 
   return (
-    <div className="mt-8 grid grid-cols-2 gap-4">
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {repos.map((repo) => (
         <RepoCard key={repo.id} repo={repo} />
       ))}

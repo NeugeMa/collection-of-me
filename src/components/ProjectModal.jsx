@@ -106,7 +106,7 @@ function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/90 p-10"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/90 p-4 sm:p-10"
           onClick={onClose}
         >
           <motion.div
@@ -117,9 +117,9 @@ function ProjectModal({ project, onClose }) {
             onClick={(event) => event.stopPropagation()}
             className="max-h-[85vh] w-full max-w-4xl overflow-y-auto border border-line bg-background"
           >
-            <div className="p-10">
+            <div className="p-6 sm:p-10">
               <div className="flex items-start justify-between gap-6">
-                <h3 className="max-w-xl font-display text-4xl">{project.title}</h3>
+                <h3 className="max-w-xl font-display text-2xl sm:text-4xl">{project.title}</h3>
 
                 <div className="flex shrink-0 items-center gap-4">
                   <div className="flex border border-line text-xs tracking-widest uppercase">
@@ -191,7 +191,7 @@ function ProjectModal({ project, onClose }) {
               )}
 
               {gallery && gallery.length > 0 && (
-                <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {gallery.map((item) => (
                     <div
                       key={item.label}

@@ -26,14 +26,14 @@ const SKILLS = [
 
 function Hero() {
   return (
-    <section className="relative flex h-[calc(100vh-96px)] flex-col justify-center gap-10 border-b border-line px-24 py-10">
-      <div className="grid w-full grid-cols-2 items-center gap-20">
+    <section className="relative flex min-h-[calc(100vh-96px)] flex-col justify-center gap-10 border-b border-line px-6 py-16 sm:px-12 lg:px-24">
+      <div className="grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div>
           <span className="text-sm tracking-widest text-rose uppercase">
             Collection Of Me · 2026
           </span>
 
-          <h1 className="mt-4 font-display text-6xl">
+          <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl">
             Mariana Neugebauer Dourado
           </h1>
 
@@ -49,13 +49,7 @@ function Hero() {
             </a>
           </p>
 
-          <p className="mt-6 max-w-md text-muted">
-            Nice to meet you :)
-            <br />
-            At the moment I'm working at{' '}
-            <span className="font-semibold text-foreground">@Integration Consulting</span>{' '}
-            with development full stack.
-          </p>
+          <p className="mt-6 max-w-md text-muted">Nice to meet you :)</p>
 
           <div className="mt-8 flex items-center gap-6">
             <a
