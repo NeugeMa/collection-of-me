@@ -1,6 +1,17 @@
+import { FileText } from 'lucide-react'
 import SkillsList from './SkillsList'
 
-function ExperienceItem({ logo, logoLabel, logoColor, company, role, period, current, skills }) {
+function ExperienceItem({
+  logo,
+  logoLabel,
+  logoColor,
+  company,
+  role,
+  period,
+  current,
+  skills,
+  certificates,
+}) {
   return (
     <div className="relative pb-16 last:pb-0">
       <span className={`absolute flex ${current ? 'top-0 -left-12 h-4 w-4' : 'top-1 -left-11 h-2 w-2'}`}>
@@ -41,6 +52,36 @@ function ExperienceItem({ logo, logoLabel, logoColor, company, role, period, cur
       </div>
 
       {skills && <SkillsList skills={skills} />}
+
+      {certificates && certificates.length > 0 && (
+        <div className="mt-4 flex flex-col gap-3">
+          {certificates.map((certificate) => (
+            <a
+              key={certificate.label}
+              href={certificate.file}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 border border-line p-3 transition-colors hover:border-foreground"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-soft text-[10px] tracking-widest text-muted uppercase">
+                {certificate.file ? (
+                  <img
+                    src={certificate.file}
+                    alt={certificate.label}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  'Cert'
+                )}
+              </div>
+              <span className="flex items-center gap-2 text-sm text-muted">
+                <FileText size={14} strokeWidth={1.5} />
+                {certificate.label}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

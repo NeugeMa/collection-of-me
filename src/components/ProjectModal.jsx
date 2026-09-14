@@ -94,6 +94,7 @@ function ProjectModal({ project, onClose }) {
 
   if (!project) return <AnimatePresence />
 
+  const subtitle = localize(project.subtitle, lang)
   const summary = localize(project.summary, lang)
   const about = localize(project.about, lang)
   const gallery = project.gallery
@@ -119,7 +120,10 @@ function ProjectModal({ project, onClose }) {
           >
             <div className="p-6 sm:p-10">
               <div className="flex items-start justify-between gap-6">
-                <h3 className="max-w-xl font-display text-2xl sm:text-4xl">{project.title}</h3>
+                <div className="max-w-xl">
+                  <h3 className="font-display text-2xl sm:text-4xl">{project.title}</h3>
+                  {subtitle && <p className="mt-2 text-sm text-rose">{subtitle}</p>}
+                </div>
 
                 <div className="flex shrink-0 items-center gap-4">
                   <div className="flex border border-line text-xs tracking-widest uppercase">

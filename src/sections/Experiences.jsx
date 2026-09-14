@@ -15,6 +15,7 @@ const experiences = [
       'English',
       'SQL',
       'C#',
+      'Azure',
     ],
   },
   {
@@ -29,6 +30,12 @@ const experiences = [
       'Computer Hardware',
       'Computer Networking',
       'Problem Solving',
+    ],
+    certificates: [
+      {
+        label: 'Windows Prompt - utilizando o CMD.png',
+        file: '/certificates/windows-prompt-cmd.png',
+      },
     ],
   },
 ]
