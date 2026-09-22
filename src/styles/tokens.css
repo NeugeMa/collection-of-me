@@ -27,3 +27,17 @@
   /* Square corners, no rounded cards */
   --radius-none: 0px;
 }
+
+/* Light mode — palette from the Side B · Personal page */
+:root[data-theme='light'] {
+  --color-background: #f0eded;
+  --color-foreground: #202020;
+  --color-rose: #998182;
+  --color-rose-2: #828282;
+  --color-muted: #828282;
+  --color-line: #e6e6e6;
+  --color-line-2: #e6e6e6;
+  --color-placeholder: #e6e6e6;
+  --color-soft: #e6e6e6;
+  --color-panel: #ffffff;
+}

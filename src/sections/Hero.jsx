@@ -49,8 +49,6 @@ function Hero() {
             </a>
           </p>
 
-          <p className="mt-6 max-w-md text-muted">Nice to meet you :)</p>
-
           <div className="mt-8 flex items-center gap-6">
             <a
               href="https://github.com/NeugeMa"

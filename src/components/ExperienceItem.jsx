@@ -1,5 +1,5 @@
 import { FileText } from 'lucide-react'
-import SkillsList from './SkillsList'
+import { SKILL_ICONS } from '../lib/skillIcons'
 
 function ExperienceItem({
   logo,
@@ -51,7 +51,19 @@ function ExperienceItem({
         </div>
       </div>
 
-      {skills && <SkillsList skills={skills} />}
+      {skills && skills.length > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          {skills.map((skill) => {
+            const Icon = SKILL_ICONS[skill]
+            return (
+              <span key={skill} className="flex items-center gap-1.5 text-xs text-muted">
+                {Icon && <Icon size={12} />}
+                {skill}
+              </span>
+            )
+          })}
+        </div>
+      )}
 
       {certificates && certificates.length > 0 && (
         <div className="mt-4 flex flex-col gap-3">

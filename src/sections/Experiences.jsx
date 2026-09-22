@@ -7,30 +7,14 @@ const experiences = [
     role: 'System Developer Intern',
     period: 'Jan 2026 –',
     current: true,
-    skills: [
-      'Data Analysis',
-      'Software Architecture',
-      'JavaScript',
-      'React.js',
-      'English',
-      'SQL',
-      'C#',
-      'Azure',
-    ],
+    skills: ['React.js', 'C#', 'TypeScript', 'Azure', 'SQL'],
   },
   {
     logo: '/logos/fiap.png',
     company: 'FIAP',
     role: 'Technical Support Intern',
     period: 'Sep 2024 – Jan 2026',
-    skills: [
-      'Microsoft Excel',
-      'Task Automation',
-      'English',
-      'Computer Hardware',
-      'Computer Networking',
-      'Problem Solving',
-    ],
+    skills: ['CMD', 'Cloud', 'Hardware', 'Microsoft Excel'],
     certificates: [
       {
         label: 'Windows Prompt - utilizando o CMD.png',
