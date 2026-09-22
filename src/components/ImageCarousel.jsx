@@ -4,7 +4,7 @@ import Dots from './Dots'
 
 const AUTOPLAY_DELAY = 4000
 
-function ImageCarousel({ images }) {
+function ImageCarousel({ images, height = 420 }) {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
@@ -20,7 +20,10 @@ function ImageCarousel({ images }) {
 
   return (
     <div>
-      <div className="relative h-[420px] overflow-hidden bg-placeholder">
+      <div
+        className="relative overflow-hidden bg-placeholder"
+        style={{ height }}
+      >
         <AnimatePresence mode="wait">
           {isImage ? (
             <motion.img

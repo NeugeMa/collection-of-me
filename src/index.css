@@ -2,6 +2,10 @@
 @import "./styles/tokens.css";
 
 @layer base {
+  *, ::before, ::after {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, fill 0.4s ease, stroke 0.4s ease;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -16,4 +20,21 @@
   .divider {
     border-color: var(--color-line);
   }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 55s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

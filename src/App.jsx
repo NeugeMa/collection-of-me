@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import About from './sections/About'
 import Experiences from './sections/Experiences'
+import Footer from './sections/Footer'
 import Hero from './sections/Hero'
 import Projects from './sections/Projects'
 
@@ -12,6 +13,7 @@ function App() {
       <About />
       <Experiences />
       <Projects />
+      <Footer />
     </div>
   )
 }
