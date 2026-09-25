@@ -1,28 +1,8 @@
-import { Cloud, Database } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
-import {
-  SiDotnet,
-  SiGo,
-  SiNodedotjs,
-  SiPython,
-  SiReact,
-  SiTypescript,
-} from 'react-icons/si'
 import GitHubContributions from '../components/GitHubContributions'
 import ImageCarousel from '../components/ImageCarousel'
 
 const PHOTOS = ['Photo 1', 'Photo 2', 'Photo 3', 'Photo 4']
-
-const SKILLS = [
-  { name: 'React', Icon: SiReact },
-  { name: 'C#', Icon: SiDotnet },
-  { name: 'Go', Icon: SiGo },
-  { name: 'TypeScript', Icon: SiTypescript },
-  { name: 'Node.js', Icon: SiNodedotjs },
-  { name: 'Python', Icon: SiPython },
-  { name: 'Oracle', Icon: Database },
-  { name: 'Azure', Icon: Cloud },
-]
 
 function Hero() {
   return (
@@ -68,18 +48,6 @@ function Hero() {
               <FaLinkedin size={16} />
               LinkedIn
             </a>
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-            {SKILLS.map(({ name, Icon }) => (
-              <span
-                key={name}
-                className="flex items-center gap-1.5 text-xs text-muted"
-              >
-                <Icon size={12} />
-                {name}
-              </span>
-            ))}
           </div>
         </div>
 

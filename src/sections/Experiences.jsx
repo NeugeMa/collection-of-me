@@ -32,7 +32,7 @@ function Experiences() {
     >
       <div className="mx-auto w-full max-w-5xl">
         <div className="mb-14 flex items-center gap-6 sm:gap-10">
-          <span className="w-12 text-sm text-muted sm:w-24">02</span>
+          <span className="w-12 text-sm text-muted sm:w-24">03</span>
           <h2 className="font-display text-3xl sm:text-4xl">Experiences</h2>
         </div>
 

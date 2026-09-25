@@ -3,25 +3,30 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Dots from '../components/Dots'
 import ProjectCard from '../components/ProjectCard'
-import ProjectModal from '../components/ProjectModal'
 
 const LOREM =
   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem repudiandae laboriosam perferendis nulla earum. Sequi cumque odio quaerat incidunt cupiditate? Vero facilis sint sed obcaecati recusandae minima ad voluptates nihil!'
 
 const projects = [
-  { title: 'Project 1', role: 'Role', timeframe: 'Timeframe', description: LOREM },
-  { title: 'Project 2', role: 'Role', timeframe: 'Timeframe', description: LOREM },
-  { title: 'Project 3', role: 'Role', timeframe: 'Timeframe', description: LOREM },
-  { title: 'Project 4', role: 'Role', timeframe: 'Timeframe', description: LOREM },
-  { title: 'Project 5', role: 'Role', timeframe: 'Timeframe', description: LOREM },
-  { title: 'Project 6', role: 'Role', timeframe: 'Timeframe', description: LOREM },
+  {
+    title: 'Orbital Academy',
+    description:
+      'A platform that takes what NASA and INPE already see from above. Crop risk, heat spots, water deficit and puts it in the hands of the people who need to decide what to do. A model predicts, an optimizer allocates, you operate. The satellite finally reaches the field.',
+    tags: ['React', 'JavaScript', 'Expo'],
+    cover: '/projects-img/orbital-academy.png',
+    liveUrl: 'https://orbital-academy-omega.vercel.app/',
+  },
+  { title: 'Project 2', description: LOREM, tags: ['Python', 'FastAPI', 'Pandas'] },
+  { title: 'Project 3', description: LOREM, tags: ['C#', 'SQL', 'Azure'] },
+  { title: 'Project 4', description: LOREM, tags: ['Go', 'Docker'] },
+  { title: 'Project 5', description: LOREM, tags: ['React', 'TailwindCSS'] },
+  { title: 'Project 6', description: LOREM, tags: ['JavaScript', 'Node.js'] },
 ]
 
-const CARDS_PER_PAGE = 2
+const CARDS_PER_PAGE = 3
 
 function Projects() {
   const [page, setPage] = useState(0)
-  const [selectedProject, setSelectedProject] = useState(null)
   const pageCount = Math.ceil(projects.length / CARDS_PER_PAGE)
 
   function goToPage(index) {
@@ -35,7 +40,7 @@ function Projects() {
     >
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 flex items-center gap-6 sm:gap-10">
-          <span className="w-12 text-sm text-muted sm:w-24">03</span>
+          <span className="w-12 text-sm text-muted sm:w-24">02</span>
           <h2 className="flex-1 font-display text-3xl sm:text-4xl">Projects</h2>
 
           <div className="flex gap-3">
@@ -69,7 +74,7 @@ function Projects() {
             {Array.from({ length: pageCount }).map((_, pageIndex) => (
               <div
                 key={pageIndex}
-                className="grid w-full shrink-0 grid-cols-1 gap-10 sm:grid-cols-2"
+                className="grid w-full shrink-0 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {projects
                   .slice(pageIndex * CARDS_PER_PAGE, pageIndex * CARDS_PER_PAGE + CARDS_PER_PAGE)
@@ -79,7 +84,12 @@ function Projects() {
                       label={project.title}
                       description={project.cardDescription ?? project.description}
                       image={project.cover}
-                      onClick={() => setSelectedProject(project)}
+                      tags={project.tags}
+                      onClick={() => {
+                        if (project.liveUrl) {
+                          window.open(project.liveUrl, '_blank', 'noopener,noreferrer')
+                        }
+                      }}
                     />
                   ))}
               </div>
@@ -91,8 +101,6 @@ function Projects() {
           <Dots count={pageCount} active={page} onSelect={goToPage} />
         </div>
       </div>
-
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   )
 }

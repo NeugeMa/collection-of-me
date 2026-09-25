@@ -1,9 +1,17 @@
+import { Cloud, Database } from 'lucide-react'
+import { SiDocker, SiDotnet, SiGo, SiNodedotjs, SiPython, SiReact, SiTypescript } from 'react-icons/si'
 import GitHubRepos from '../components/GitHubRepos'
 
-const ABOUT_PARAGRAPHS = [
-  'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  'Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  'Curabitur pretium tincidunt lacus ut malesuada velit convallis in cras ultricies mi eget mauris pharetra.',
+const SKILLS = [
+  { name: 'React', Icon: SiReact },
+  { name: 'C#', Icon: SiDotnet },
+  { name: 'Go', Icon: SiGo },
+  { name: 'TypeScript', Icon: SiTypescript },
+  { name: 'Node.js', Icon: SiNodedotjs },
+  { name: 'Python', Icon: SiPython },
+  { name: 'Oracle', Icon: Database },
+  { name: 'Azure', Icon: Cloud },
+  { name: 'Docker', Icon: SiDocker },
 ]
 
 function About() {
@@ -19,19 +27,30 @@ function About() {
         </div>
 
         <div className="flex max-w-3xl flex-1 flex-col gap-6">
-          <p className="text-lg text-foreground">{ABOUT_PARAGRAPHS[0]}</p>
-          <p className="text-muted">{ABOUT_PARAGRAPHS[1]}</p>
-          <p className="text-muted">{ABOUT_PARAGRAPHS[2]}</p>
-
-          <hr className="border-line" />
-
+          <p className="text-lg text-foreground">Hi, I'm Mariana! Nice to meet you :)</p>
           <p className="text-muted">
-            If any of this overlaps with yours,{' '}
-            <a href="#" className="text-rose underline-offset-4 hover:underline">
-              say hi
-            </a>
-            .
+            I'm pursuing a degree in Software Engineering at{' '}
+            <span className="text-rose">@FIAP</span>, and previously, I studied Data Analysis and
+            Development. Along the way, I've gained experience with several programming languages
+            and technologies, such as SQL, JavaScript, C#, Python, and Golang, as well as a
+            solid understanding of hardware.
           </p>
+
+          <p className="text-muted">In addition to my technical background, I have familiarity with DevOps practices, UX/UI Design principles, and Agile Methodology, which help me contribute to modern, collaborative, and user-centered development environments.</p>
+          <p className="text-muted">I also have an advanced level of English and basic knowledge of Spanish, continuously seeking to broaden my cultural and professional horizons.</p>
+
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            {SKILLS.map(({ name, Icon }) => (
+              <span
+                key={name}
+                className="flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-rose"
+              >
+                <Icon size={12} />
+                {name}
+              </span>
+            ))}
+          </div>
 
           <GitHubRepos />
         </div>

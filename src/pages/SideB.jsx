@@ -1,16 +1,19 @@
-import { useState } from 'react'
 import { ArrowLeft, Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import HobbyModal from '../components/HobbyModal'
 import MarqueeGallery from '../components/MarqueeGallery'
-import ProjectCard from '../components/ProjectCard'
 import useTheme from '../hooks/useTheme'
 import Footer from '../sections/Footer'
 
 const GALLERY_PHOTOS = [
   { label: 'Photo 1', src: '/image/side-b/Image.jpg' },
   { label: 'Photo 2', src: '/image/side-b/Image%20(1).jpg' },
-  ...Array.from({ length: 8 }, (_, index) => ({ label: `Photo ${index + 3}` })),
+  { label: 'Photo 3', src: '/image/side-b/Image%20(2).jpg' },
+  { label: 'Photo 4', src: '/image/side-b/Image%20(3).jpg' },
+  { label: 'Photo 5', src: '/image/side-b/Image%20(4).jpg' },
+  { label: 'Photo 6', src: '/image/side-b/Image%20(5).jpg' },
+  { label: 'Photo 7', src: '/image/side-b/Image%20(6).jpg' },
+  { label: 'Photo 8', src: '/image/side-b/Image%20(7).jpg' },
+  { label: 'Photo 9', src: '/image/side-b/Image%20(8).jpg' },
 ]
 
 const SIDE_B_PARAGRAPHS = [
@@ -19,18 +22,8 @@ const SIDE_B_PARAGRAPHS = [
   'Curabitur pretium tincidunt lacus ut malesuada velit convallis in cras ultricies mi eget mauris pharetra.',
 ]
 
-const HOBBY_DESCRIPTION =
-  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem repudiandae laboriosam perferendis nulla earum. Sequi cumque odio quaerat incidunt cupiditate? Vero facilis sint sed obcaecati recusandae minima ad voluptates nihil!'
-
-const HOBBIES = [
-  { title: 'Hobby 1', description: HOBBY_DESCRIPTION },
-  { title: 'Hobby 2', description: HOBBY_DESCRIPTION },
-  { title: 'Hobby 3', description: HOBBY_DESCRIPTION },
-]
-
 function SideB() {
   const { theme, toggleTheme } = useTheme()
-  const [selectedHobby, setSelectedHobby] = useState(null)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -87,30 +80,6 @@ function SideB() {
             <p className="text-muted">{SIDE_B_PARAGRAPHS[2]}</p>
           </div>
         </div>
-      </section>
-
-      <section className="border-t border-line px-6 py-16 sm:px-12 lg:px-24 lg:py-20">
-        <div className="mx-auto w-full max-w-6xl">
-          <div className="mb-10 flex items-center gap-6 sm:gap-10">
-            <span className="w-12 text-sm text-muted sm:w-24">02</span>
-            <h2 className="flex-1 font-display text-3xl sm:text-4xl">Hobbies</h2>
-          </div>
-
-          <hr className="border-line" />
-
-          <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-3">
-            {HOBBIES.map((hobby) => (
-              <ProjectCard
-                key={hobby.title}
-                label={hobby.title}
-                description={hobby.description}
-                onClick={() => setSelectedHobby(hobby)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <HobbyModal hobby={selectedHobby} onClose={() => setSelectedHobby(null)} />
       </section>
 
       <Footer />
