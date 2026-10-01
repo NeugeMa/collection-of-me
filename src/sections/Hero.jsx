@@ -1,12 +1,12 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import GitHubContributions from '../components/GitHubContributions'
-import ImageCarousel from '../components/ImageCarousel'
-
-const PHOTOS = ['Photo 1', 'Photo 2', 'Photo 3', 'Photo 4']
+import { useLanguage } from '../hooks/useLanguage.jsx'
 
 function Hero() {
+  const { lang } = useLanguage()
+
   return (
-    <section className="relative flex min-h-[calc(100vh-96px)] flex-col justify-center gap-10 border-b border-line px-6 py-16 sm:px-12 lg:px-24">
+    <section className="relative flex min-h-[calc(100vh-96px)] flex-col justify-center border-b border-line px-6 py-16 sm:px-12 lg:px-24">
       <div className="grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <div>
           <span className="text-sm tracking-widest text-rose uppercase">
@@ -18,7 +18,9 @@ function Hero() {
           </h1>
 
           <p className="mt-4 text-lg">
-            <span className="text-foreground">Software Engineer at </span>
+            <span className="text-foreground">
+              {lang === 'pt' ? 'Engenheira de Software na ' : 'Software Engineer at '}
+            </span>
             <a
               href="https://integrationconsulting.com/en/"
               target="_blank"
@@ -51,10 +53,8 @@ function Hero() {
           </div>
         </div>
 
-        <ImageCarousel images={PHOTOS} height={440} />
+        <GitHubContributions />
       </div>
-
-      <GitHubContributions />
     </section>
   )
 }

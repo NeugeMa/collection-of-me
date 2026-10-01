@@ -1,6 +1,7 @@
 import { ArrowLeft, Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import MarqueeGallery from '../components/MarqueeGallery'
+import { useLanguage } from '../hooks/useLanguage.jsx'
 import useTheme from '../hooks/useTheme'
 import Footer from '../sections/Footer'
 
@@ -24,21 +25,45 @@ const SIDE_B_PARAGRAPHS = [
 
 function SideB() {
   const { theme, toggleTheme } = useTheme()
+  const { lang, setLang } = useLanguage()
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 flex h-24 items-center justify-between border-b border-line bg-background/90 px-6 backdrop-blur sm:px-12 lg:px-24">
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-        >
-          <ArrowLeft size={16} strokeWidth={1.5} />
-          Back to portfolio
-        </Link>
+        <div className="flex items-center gap-4 sm:gap-10">
+          <div className="flex border border-line text-xs tracking-widest uppercase">
+            <button
+              type="button"
+              onClick={() => setLang('pt')}
+              className={`cursor-pointer px-3 py-1.5 transition-colors ${
+                lang === 'pt' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+              }`}
+            >
+              PT
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('en')}
+              className={`cursor-pointer border-l border-line px-3 py-1.5 transition-colors ${
+                lang === 'en' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            <ArrowLeft size={16} strokeWidth={1.5} />
+            {lang === 'pt' ? 'Voltar ao portfólio' : 'Back to portfolio'}
+          </Link>
+        </div>
 
         <div className="flex items-center gap-4 sm:gap-10">
           <span className="text-xs tracking-widest text-muted uppercase">
-            Side B · Personal
+            {lang === 'pt' ? 'Lado B · Pessoal' : 'Side B · Personal'}
           </span>
 
           <button
@@ -58,10 +83,20 @@ function SideB() {
 
       <section className="flex flex-col items-center gap-6 px-6 py-24 text-center sm:px-12 sm:py-32">
         <span className="text-xs tracking-widest text-muted uppercase">
-          What I do when I'm not using notebook
+          {lang === 'pt'
+            ? "O que eu faço quando não estou no notebook"
+            : "What I do when I'm not using notebook"}
         </span>
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl">
-          The <em className="text-rose">personal</em> side
+          {lang === 'pt' ? (
+            <>
+              O lado <em className="text-rose">pessoal</em>
+            </>
+          ) : (
+            <>
+              The <em className="text-rose">personal</em> side
+            </>
+          )}
         </h1>
       </section>
 
@@ -71,7 +106,9 @@ function SideB() {
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 lg:flex-row lg:items-start">
           <div className="flex items-start gap-6 lg:w-72 lg:shrink-0">
             <span className="text-sm text-muted">01</span>
-            <h2 className="font-display text-3xl sm:text-4xl">About Me</h2>
+            <h2 className="font-display text-3xl sm:text-4xl">
+              {lang === 'pt' ? 'Sobre mim' : 'About Me'}
+            </h2>
           </div>
 
           <div className="flex max-w-3xl flex-1 flex-col gap-6">

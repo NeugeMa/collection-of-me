@@ -1,24 +1,47 @@
 import { Download, Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../hooks/useLanguage.jsx'
 import useTheme from '../hooks/useTheme'
 
 function Navbar() {
   const { theme, toggleTheme } = useTheme()
+  const { lang, setLang } = useLanguage()
 
   return (
-    <header className="sticky top-0 z-50 flex h-24 items-center justify-end border-b border-line bg-background/90 px-6 backdrop-blur sm:px-12 lg:px-24">
+    <header className="sticky top-0 z-50 flex h-24 items-center justify-between border-b border-line bg-background/90 px-6 backdrop-blur sm:px-12 lg:px-24">
+      <div className="flex border border-line text-xs tracking-widest uppercase">
+        <button
+          type="button"
+          onClick={() => setLang('pt')}
+          className={`cursor-pointer px-3 py-1.5 transition-colors ${
+            lang === 'pt' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+          }`}
+        >
+          PT
+        </button>
+        <button
+          type="button"
+          onClick={() => setLang('en')}
+          className={`cursor-pointer border-l border-line px-3 py-1.5 transition-colors ${
+            lang === 'en' ? 'bg-soft text-foreground' : 'text-muted hover:text-foreground'
+          }`}
+        >
+          EN
+        </button>
+      </div>
+
       <nav className="flex items-center gap-4 sm:gap-10">
-        <a
-          href="#certificates"
+        <Link
+          to="/certificates"
           className="text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
         >
-          Certificates
-        </a>
+          {lang === 'pt' ? 'Certificados' : 'Certificates'}
+        </Link>
         <Link
           to="/side-b"
           className="text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
         >
-          Side B · Personal
+          {lang === 'pt' ? 'Lado B · Pessoal' : 'Side B · Personal'}
         </Link>
         <button
           type="button"

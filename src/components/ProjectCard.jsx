@@ -1,11 +1,16 @@
 import { motion } from 'framer-motion'
+import { FaGithub } from 'react-icons/fa'
 import { SKILL_ICONS } from '../lib/skillIcons'
 
-function ProjectCard({ label, description, image, tags, onClick, ...motionProps }) {
+function ProjectCard({ label, description, image, tags, repoUrl, onClick, ...motionProps }) {
   return (
-    <motion.button
-      type="button"
+    <motion.div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') onClick?.()
+      }}
       whileTap={{ scale: 0.97 }}
       {...motionProps}
       className="group flex w-full cursor-pointer flex-col text-left"
@@ -18,11 +23,28 @@ function ProjectCard({ label, description, image, tags, onClick, ...motionProps 
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="h-full w-full transition-colors group-hover:bg-soft" />
+          <div className="flex h-full w-full items-center justify-center transition-colors group-hover:bg-soft">
+            <span className="text-xs tracking-widest text-muted uppercase">No image</span>
+          </div>
         )}
       </div>
 
-      <h3 className="mt-4 text-lg font-semibold text-foreground">{label}</h3>
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <h3 className="text-lg font-semibold text-foreground">{label}</h3>
+
+        {repoUrl && (
+          <a
+            href={repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            aria-label="Repository"
+            className="shrink-0 text-muted transition-colors hover:text-foreground"
+          >
+            <FaGithub size={18} />
+          </a>
+        )}
+      </div>
 
       <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out group-hover:grid-rows-[1fr]">
         <div className="overflow-hidden">
@@ -40,10 +62,12 @@ function ProjectCard({ label, description, image, tags, onClick, ...motionProps 
             </div>
           )}
 
-          {description && <p className="mt-2 text-sm text-muted">{description}</p>}
+          {description && (
+            <p className="mt-2 text-sm whitespace-pre-line text-muted">{description}</p>
+          )}
         </div>
       </div>
-    </motion.button>
+    </motion.div>
   )
 }
 

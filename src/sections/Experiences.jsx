@@ -1,10 +1,11 @@
 import ExperienceItem from '../components/ExperienceItem'
+import { useLanguage } from '../hooks/useLanguage.jsx'
 
 const experiences = [
   {
     logo: '/logos/integration-consulting.png',
     company: 'Integration Consulting',
-    role: 'System Developer Intern',
+    role: { en: 'System Developer Intern', pt: 'Estagiária de Desenvolvimento de Sistemas' },
     period: 'Jan 2026 –',
     current: true,
     skills: ['React.js', 'C#', 'TypeScript', 'Azure', 'SQL'],
@@ -12,19 +13,15 @@ const experiences = [
   {
     logo: '/logos/fiap.png',
     company: 'FIAP',
-    role: 'Technical Support Intern',
+    role: { en: 'Technical Support Intern', pt: 'Estagiária de Suporte Técnico' },
     period: 'Sep 2024 – Jan 2026',
     skills: ['CMD', 'Cloud', 'Hardware', 'Microsoft Excel'],
-    certificates: [
-      {
-        label: 'Windows Prompt - utilizando o CMD.png',
-        file: '/certificates/windows-prompt-cmd.png',
-      },
-    ],
   },
 ]
 
 function Experiences() {
+  const { lang } = useLanguage()
+
   return (
     <section
       id="experiences"
@@ -33,12 +30,18 @@ function Experiences() {
       <div className="mx-auto w-full max-w-5xl">
         <div className="mb-14 flex items-center gap-6 sm:gap-10">
           <span className="w-12 text-sm text-muted sm:w-24">03</span>
-          <h2 className="font-display text-3xl sm:text-4xl">Experiences</h2>
+          <h2 className="font-display text-3xl sm:text-4xl">
+            {lang === 'pt' ? 'Experiências' : 'Experiences'}
+          </h2>
         </div>
 
         <div className="border-l border-line pl-6 sm:pl-10">
           {experiences.map((experience) => (
-            <ExperienceItem key={experience.company} {...experience} />
+            <ExperienceItem
+              key={experience.company}
+              {...experience}
+              role={experience.role[lang]}
+            />
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { FileText } from 'lucide-react'
+import { useLanguage } from '../hooks/useLanguage.jsx'
 import { SKILL_ICONS } from '../lib/skillIcons'
 
 function ExperienceItem({
@@ -12,6 +13,8 @@ function ExperienceItem({
   skills,
   certificates,
 }) {
+  const { lang } = useLanguage()
+
   return (
     <div className="relative pb-16 last:pb-0">
       <span className={`absolute flex ${current ? 'top-0 -left-12 h-4 w-4' : 'top-1 -left-11 h-2 w-2'}`}>
@@ -46,7 +49,9 @@ function ExperienceItem({
           </p>
           <p className="mt-1 text-xs tracking-widest uppercase">
             <span className="text-muted">{period}</span>
-            {current && <span className="text-rose"> · Present</span>}
+            {current && (
+              <span className="text-rose"> · {lang === 'pt' ? 'Atual' : 'Present'}</span>
+            )}
           </p>
         </div>
       </div>
