@@ -1,6 +1,7 @@
 import { ArrowUp } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { SiReact, SiTailwindcss, SiVercel } from 'react-icons/si'
+import { useLanguage } from '../hooks/useLanguage.jsx'
 
 const STACK = [
   { name: 'React', Icon: SiReact },
@@ -14,14 +15,28 @@ function scrollToTop(event) {
 }
 
 function Footer() {
+  const { lang } = useLanguage()
+
   return (
     <footer className="border-t border-line bg-panel">
       <div className="flex flex-col gap-10 px-6 py-14 sm:px-12 lg:px-24 lg:py-20 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-4xl">
-            Let's <em className="text-rose">talk</em>
+            {lang === 'pt' ? (
+              <>
+                Vamos <em className="text-rose">conversar</em>
+              </>
+            ) : (
+              <>
+                Let's <em className="text-rose">talk</em>
+              </>
+            )}
           </h2>
-          <p className="mt-2 text-muted">Copyright ©NeugeMa All Rights Reserved</p>
+          <p className="mt-2 text-muted">
+            {lang === 'pt'
+              ? 'Copyright ©NeugeMa Todos os Direitos Reservados'
+              : 'Copyright ©NeugeMa All Rights Reserved'}
+          </p>
           <a
             href="mailto:mariana.n.dourado@gmail.com"
             className="mt-1 block text-sm text-rose transition-colors hover:text-foreground"
@@ -54,7 +69,7 @@ function Footer() {
 
       <div className="flex flex-col gap-6 border-t border-line px-6 py-6 sm:px-12 lg:px-24 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-6 text-sm text-muted">
-          <span>Built with:</span>
+          <span>{lang === 'pt' ? 'Feito com:' : 'Built with:'}</span>
           {STACK.map(({ name, Icon }) => (
             <span key={name} className="flex items-center gap-2">
               <Icon size={16} />
@@ -70,7 +85,7 @@ function Footer() {
           className="flex cursor-pointer items-center gap-2 text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
         >
           <ArrowUp size={14} strokeWidth={1.5} />
-          Back to top
+          {lang === 'pt' ? 'Voltar ao topo' : 'Back to top'}
         </button>
       </div>
     </footer>
