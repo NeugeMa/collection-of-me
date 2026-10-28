@@ -1,9 +1,9 @@
 import Navbar from './components/Navbar'
 import About from './sections/About'
+import Certificates from './sections/Certificates'
 import Experiences from './sections/Experiences'
 import Footer from './sections/Footer'
 import Hero from './sections/Hero'
-import Projects from './sections/Projects'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <Projects />
+      <Certificates />
       <Experiences />
       <Footer />
     </div>

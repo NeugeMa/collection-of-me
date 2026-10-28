@@ -1,5 +1,5 @@
 import { Cloud, Database, HardDrive, Terminal } from 'lucide-react'
-import { FaFileExcel } from 'react-icons/fa'
+import { FaFileExcel, FaJava } from 'react-icons/fa'
 import {
   SiDocker,
   SiDotnet,
@@ -21,6 +21,7 @@ export const SKILL_ICONS = {
   'React.js': SiReact,
   'C#': SiDotnet,
   'Go': SiGo,
+  'Java': FaJava,
   'TypeScript': SiTypescript,
   'Node.js': SiNodedotjs,
   'Python': SiPython,

@@ -32,12 +32,6 @@ function Navbar() {
 
       <nav className="flex items-center gap-4 sm:gap-10">
         <Link
-          to="/certificates"
-          className="text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
-        >
-          {lang === 'pt' ? 'Certificados' : 'Certificates'}
-        </Link>
-        <Link
           to="/side-b"
           className="text-xs tracking-widest text-muted uppercase transition-colors hover:text-foreground"
         >

@@ -29,7 +29,15 @@ const projects = [
     tags: ['C#', 'SQL'],
     repoUrl: 'https://github.com/NeugeMa/biblioteca-api',
   },
-  { title: 'Project 3', description: { en: LOREM, pt: LOREM }, tags: ['C#', 'SQL', 'Azure'] },
+  {
+    title: 'SAST Platform: Static Security Analysis',
+    description: {
+      en: 'Built a SAST platform that analyzes Java code from public GitHub repositories without executing it. It combines deterministic AST-based rules, taint tracing, and advisory insights from a local LLM (Ollama). The system uses an asynchronous architecture with RabbitMQ, PostgreSQL (outbox pattern), and background workers, and degrades gracefully if the AI is unavailable.',
+      pt: 'Desenvolvi uma plataforma SAST que analisa código Java de repositórios públicos do GitHub sem executá-lo. Ela combina regras determinísticas baseadas em AST, rastreamento de taint e insights consultivos de um LLM local (Ollama). O sistema usa uma arquitetura assíncrona com RabbitMQ, PostgreSQL (padrão outbox) e workers em segundo plano, e degrada de forma controlada caso a IA esteja indisponível.',
+    },
+    tags: ['Java'],
+    repoUrl: 'https://github.com/EduDalla/plataforma-sast',
+  },
   { title: 'Project 4', description: { en: LOREM, pt: LOREM }, tags: ['Go', 'Docker'] },
   { title: 'Project 5', description: { en: LOREM, pt: LOREM }, tags: ['React', 'TailwindCSS'] },
   { title: 'Project 6', description: { en: LOREM, pt: LOREM }, tags: ['JavaScript', 'Node.js'] },
@@ -53,7 +61,7 @@ function Projects() {
     >
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 flex items-center gap-6 sm:gap-10">
-          <span className="w-12 text-sm text-muted sm:w-24">02</span>
+          <span className="w-12 text-sm text-muted sm:w-24">03</span>
           <h2 className="flex-1 font-display text-3xl sm:text-4xl">
             {lang === 'pt' ? 'Projetos' : 'Projects'}
           </h2>
