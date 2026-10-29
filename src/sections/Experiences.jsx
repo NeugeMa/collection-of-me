@@ -56,30 +56,32 @@ function Experiences() {
           </h2>
         </div>
 
-        <div ref={containerRef} className="mt-12 overflow-hidden py-2">
-          <motion.div
-            ref={trackRef}
-            drag="x"
-            dragConstraints={{ left: -dragLimit, right: 0 }}
-            dragElastic={0.12}
-            dragTransition={{ bounceStiffness: 220, bounceDamping: 26 }}
-            className="flex cursor-grab gap-10 select-none active:cursor-grabbing"
-          >
-            {experiences.map((experience, index) => (
-              <div key={experience.company} className="relative w-[90%] shrink-0">
-                <div
-                  className={`absolute top-0 left-0 h-px bg-line ${
-                    index === experiences.length - 1 ? 'right-0' : '-right-10'
-                  }`}
-                />
-                <ExperienceItem
-                  {...experience}
-                  role={experience.role[lang]}
-                  description={experience.description[lang]}
-                />
-              </div>
-            ))}
-          </motion.div>
+        <div className="-mx-6 mt-12 overflow-hidden px-6 py-6">
+          <div ref={containerRef}>
+            <motion.div
+              ref={trackRef}
+              drag="x"
+              dragConstraints={{ left: -dragLimit, right: 0 }}
+              dragElastic={0.12}
+              dragTransition={{ bounceStiffness: 220, bounceDamping: 26 }}
+              className="flex cursor-grab gap-10 select-none active:cursor-grabbing"
+            >
+              {experiences.map((experience, index) => (
+                <div key={experience.company} className="relative w-[90%] shrink-0">
+                  <div
+                    className={`absolute top-0 left-0 h-px bg-line ${
+                      index === experiences.length - 1 ? 'right-0' : '-right-10'
+                    }`}
+                  />
+                  <ExperienceItem
+                    {...experience}
+                    role={experience.role[lang]}
+                    description={experience.description[lang]}
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

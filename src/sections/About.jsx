@@ -49,38 +49,42 @@ function About() {
       id="about"
       className="flex min-h-screen flex-col justify-center border-b border-line px-6 py-16 sm:px-12 lg:px-24 lg:py-20"
     >
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 lg:flex-row lg:items-start">
-        <div className="flex items-start gap-6 lg:w-72 lg:shrink-0">
-          <span className="text-sm text-muted">01</span>
-          <h2 className="font-display text-3xl sm:text-4xl">{copy.heading}</h2>
-        </div>
-
-        <div className="flex max-w-3xl flex-1 flex-col gap-6">
-          <p className="text-lg text-foreground">{copy.greeting}</p>
-          <p className="text-muted">
-            {copy.bioStart}
-            <span className="text-rose">@FIAP</span>
-            {copy.bioEnd}
-          </p>
-
-          <p className="text-muted">{copy.devops}</p>
-          <p className="text-muted">{copy.languages}</p>
-
-
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            {SKILLS.map(({ name, Icon }) => (
-              <span
-                key={name}
-                className="flex items-center gap-1.5 text-xs text-rose"
-              >
-                <Icon size={12} />
-                {name}
-              </span>
-            ))}
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start">
+          <div className="flex items-start gap-6 lg:w-72 lg:shrink-0">
+            <span className="text-sm text-muted">01</span>
+            <h2 className="font-display text-3xl sm:text-4xl">{copy.heading}</h2>
           </div>
 
-          <GitHubRepos />
+          <div className="flex max-w-3xl flex-1 flex-col gap-6">
+            <p className="text-lg text-foreground">{copy.greeting}</p>
+            <p className="text-muted">
+              {copy.bioStart}
+              <span className="text-rose">@FIAP</span>
+              {copy.bioEnd}
+            </p>
+
+            <p className="text-muted">{copy.devops}</p>
+            <p className="text-muted">{copy.languages}</p>
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              {SKILLS.map(({ name, Icon }) => (
+                <span
+                  key={name}
+                  className="group flex cursor-default items-center gap-1.5 text-xs text-muted transition-all duration-300 hover:-translate-y-0.5 hover:text-rose"
+                >
+                  <Icon
+                    size={12}
+                    className="transition-transform duration-300 group-hover:scale-125"
+                  />
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
+
+        <GitHubRepos />
       </div>
     </section>
   )

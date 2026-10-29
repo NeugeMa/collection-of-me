@@ -1,7 +1,6 @@
 import { useLanguage } from '../hooks/useLanguage.jsx'
 
-const certificates = [
-  { issuer: 'Issuer', date: { en: 'Month 2026', pt: 'Mês 2026' } },
+const placeholders = [
   { issuer: 'Issuer', date: { en: 'Month 2026', pt: 'Mês 2026' } },
   { issuer: 'Issuer', date: { en: 'Month 2026', pt: 'Mês 2026' } },
   { issuer: 'Issuer', date: { en: 'Month 2025', pt: 'Mês 2025' } },
@@ -9,9 +8,20 @@ const certificates = [
   { issuer: 'Issuer', date: { en: 'Month 2025', pt: 'Mês 2025' } },
 ].map((certificate, index) => ({
   ...certificate,
-  id: index,
-  title: { en: `Certificate title ${index + 1}`, pt: `Título do certificado ${index + 1}` },
+  id: index + 1,
+  title: { en: `Certificate title ${index + 2}`, pt: `Título do certificado ${index + 2}` },
 }))
+
+const certificates = [
+  {
+    id: 0,
+    issuer: 'Ada',
+    date: { en: 'Oct – May 2026', pt: 'out – maio 2026' },
+    title: { en: 'Bootcamp Ada', pt: 'Bootcamp Ada' },
+    file: encodeURI('/certificates/Certificado  Bootcamp - Ada.pdf'),
+  },
+  ...placeholders,
+]
 
 function Certificates() {
   const { lang } = useLanguage()
@@ -30,19 +40,27 @@ function Certificates() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {certificates.map((certificate) => (
-            <div
-              key={certificate.id}
-              className="flex min-h-44 flex-col gap-3 border border-line bg-panel p-6 transition-colors hover:border-rose"
-            >
-              <p className="text-[11px] tracking-widest text-muted uppercase">
-                {certificate.issuer} · {certificate.date[lang]}
-              </p>
-              <h3 className="text-base font-semibold text-foreground">
-                {certificate.title[lang]}
-              </h3>
-            </div>
-          ))}
+          {certificates.map((certificate) => {
+            const Card = certificate.file ? 'a' : 'div'
+            const linkProps = certificate.file
+              ? { href: certificate.file, target: '_blank', rel: 'noopener noreferrer' }
+              : {}
+
+            return (
+              <Card
+                key={certificate.id}
+                {...linkProps}
+                className="flex min-h-44 flex-col gap-3 border border-line bg-panel p-6 transition-colors hover:border-rose"
+              >
+                <p className="text-[11px] tracking-widest text-muted uppercase">
+                  {certificate.issuer} · {certificate.date[lang]}
+                </p>
+                <h3 className="text-base font-semibold text-foreground">
+                  {certificate.title[lang]}
+                </h3>
+              </Card>
+            )
+          })}
         </div>
       </div>
     </section>
