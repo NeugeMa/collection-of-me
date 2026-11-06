@@ -29,11 +29,11 @@ function GitHubRepos() {
 
   if (error) return null
   if (!repos) {
-    return <p className="mt-8 text-sm text-muted">Loading recent repositories…</p>
+    return <p className="mt-12 text-sm text-muted">Loading recent repositories…</p>
   }
 
   return (
-    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {repos.map((repo) => (
         <RepoCard key={repo.id} repo={repo} />
       ))}
